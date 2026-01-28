@@ -1,20 +1,10 @@
 
-#!/usr/bin/env python3
-"""Flexible QR code generator.
-
-Tries to use `segno` (pure Python) or `qrcode` (Pillow) if installed,
-otherwise falls back to downloading a QR image from Google Charts API.
-"""
 import sys
 from urllib.parse import quote_plus
 
 
 def generate_qr(link, filename="qr.png", scale=10):
-	"""Generate a QR code for `link` and save it to `filename`.
 
-	Returns the path to the saved file on success.
-	"""
-	# Try segno (no Pillow dependency)
 	try:
 		import segno
 
@@ -24,7 +14,6 @@ def generate_qr(link, filename="qr.png", scale=10):
 	except Exception:
 		pass
 
-	# Try qrcode (requires Pillow)
 	try:
 		import qrcode
 
@@ -35,7 +24,6 @@ def generate_qr(link, filename="qr.png", scale=10):
 	except Exception:
 		pass
 
-	# Fallback: download image from Google Charts API (no extra libs required beyond requests)
 	try:
 		import requests
 
@@ -55,13 +43,13 @@ def generate_qr(link, filename="qr.png", scale=10):
 
 
 if __name__ == "__main__":
-	# Default link requested by the user
-	default_link = "https://shelli-aposporic-ecotypically.ngrok-free.dev/"
+	
+	default_link = "https://www.maiinji.com"
 	link = default_link
 	out = "qr.png"
 	if len(sys.argv) > 1:
 		link = sys.argv[1]
 	if len(sys.argv) > 2:
 		out = sys.argv[2]
-	generate_qr(link, out)
+generate_qr(link, out)
 
