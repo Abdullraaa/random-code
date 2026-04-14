@@ -43,13 +43,21 @@ def generate_qr(link, filename="qr.png", scale=10):
 
 
 if __name__ == "__main__":
-	
-	default_link = "https://www.maiinji.com"
-	link = default_link
-	out = "qr.png"
-	if len(sys.argv) > 1:
+	def generate_wifi_qr(ssid, password, auth="WPA", hidden=False, filename="wifi_qr.png"):
+		auth = auth.upper() if auth else ""
+		hidden_flag = "H:true;" if hidden else ""
+		payload = f"WIFI:T:{auth};S:{ssid};P:{password};{hidden_flag};"
+		return generate_qr(payload, filename)
+
+	ssid = "Linksys01070"
+	password = "yxvyxzv0z"
+	out = "down_wifi_qr.png"
+
+	if len(sys.argv) > 1 and sys.argv[1].lower() != "wifi":
 		link = sys.argv[1]
-	if len(sys.argv) > 2:
-		out = sys.argv[2]
-generate_qr(link, out)
+		if len(sys.argv) > 2:
+			out = sys.argv[2]
+		generate_qr(link, out)
+	else:
+		generate_wifi_qr(ssid, password, filename=out)
 

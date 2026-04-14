@@ -1,11 +1,11 @@
 def password_check():
 
     password = input("enter a password: ")
-    specal = "!@#$%&-"
+    special = "!@#$%&-"
 
     has_upper = False
     has_digit = False
-    has_specal = False
+    has_special = False
 
     if len(password) < 8:
         print("weak password")
@@ -13,20 +13,20 @@ def password_check():
         return
 
     for char in password:
-        if char.isupper:
+        if char.isupper():
             has_upper = True
-        elif char.isdigit:
+        elif char.isdigit():
             has_digit = True
-        elif char in specal:
-            has_specal = True
+        elif char in special:
+            has_special = True
 
 
-    if has_upper and has_digit and has_specal:
+    if has_upper and has_digit and has_special:
         print("password is strong")
     else:
         print("weak password")
-        if not has_specal:
-            print("missing specal character")
+        if not has_special:
+            print("missing special character")
         if not has_digit:
             print("missing digits")
         if not has_upper:
